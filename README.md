@@ -24,4 +24,8 @@ Run the "main"-python file in /lib and follow the instructions and you are *good
 # Security note
 This section will inform you about how you can safe your bot against black hat hackers/exploits etc.
 
+## Permissions
 Please go to the Discord Developer Portal `/applications/<application id>/bot` and scroll down to the section "Bot permissions". From there, tick all **needed and used** permissions. Do NOT tick "Administrator" - this will allow the bot to do almost everything on your server. And, do NOT tick unused permissions.
+
+## Token
+The bot token is secret! Everyone with access to the token can execute everything allowed to the bot (see "Permissions"). Therefore, remember to put the token.txt in the `.gitignore`, if you are using Git.
