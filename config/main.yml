@@ -2,7 +2,16 @@ main:
   prefix: "."
 
 currency:
+  rarity_normal:
+    min: 50
+    max: 150
+
+  rarity_epic:
+    min: 0
+    max: 2
+
   symbols:
+    error: ":x:"
     currency_normal: ":coin:"
     currency_epic: ":star:"
     alt_symbols:
@@ -19,22 +28,27 @@ language:
   dailychest:
     - Sieh mal, was in deiner daily-Truhe drin ist.
     - Schau, deine daily-Truhe.
-    - Gönne dir deine Truhe!
+    - Gönn' dir deine Truhe!
+
+  dailyerror:
+    - Hmm... Du bist etwas zu gierig. Warte bis morgen, ok?
+    - Coins wachsen nicht auf Bäumen! Warte noch einen Tag.
+    - Hey, ich kann dir das ***noch*** nicht geben. Warte bitte bis morgen.
   
   coinbooster:
-    - Du hast einen Coinbooster gefunden!
-    - GG, du hast einen Coinbooster entdeckt!
-    - Nice, ein Coinbooster!
+    - Du hast einen **Coinbooster** gefunden!
+    - GG, du hast einen **Coinbooster** entdeckt!
+    - Nice, ein **Coinbooster**!
 
   coinmultiplier:
-    - Nice, ein Multiplier!
-    - GG! Hier, ein Multiplier.
-    - Cool, du hast einen Multiplier gefunden!
+    - Nice, ein **Multiplier**!
+    - GG! Hier, ein **Multiplier**.
+    - Cool, du hast einen **Multiplier** gefunden!
 
   epic:
-    - Du hast ein episches Item gefunden ^^
-    - GG! Du hast ein episches Item gefunden!
-    - NICE! Ein episches Item!
+    - Du hast ein **episches** Item gefunden ^^
+    - GG! Du hast ein **episches** Item gefunden!
+    - NICE! Ein **episches** Item!
 
   spam:
     - Hey, komm' runter.
@@ -42,9 +56,9 @@ language:
     - Bitte sei ehrenvoll deiner Tastatur xD
 
   useitem:
-    - Okay, du aktivierst dieses Item.
-    - Okay. Dieses Item ist nun aktiv.
-    - Ok. Dein Item ist jetzt aktiviert.
+    - Okay, du **aktivierst** dieses Item.
+    - Okay. Dieses Item ist nun **aktiv**.
+    - Ok. Dein Item ist jetzt **aktiviert**.
 
   userror:
     - Oh, du kannst leider dieses Item nicht benutzen.
@@ -53,7 +67,7 @@ language:
 
   giveaway:
     join:
-      - Nice, du bist nun dem Giveaway beigetreten!
+      - Nice, du bist nun beigetreten!
       - Cool, viel Glück!
       - Ok, du bist dabei.
     

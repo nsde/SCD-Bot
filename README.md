@@ -1,5 +1,7 @@
 # Installation
 Execute in root dir: `pip install -r requirements.txt` to install the needed libaries.
+After that, create a file in "\config" called "token.txt". The content of the file has to be the bot token (see the section "Security" > "Token")
+
 ## Fix errors:
 If you get "ERROR: Could not build wheels for multidict, yarl which use PEP 517 and cannot be installed directly":
 - __(not recommended)__ Downgrade to Python 3.8.6 

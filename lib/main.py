@@ -1,16 +1,21 @@
+# -*- coding: utf-8 -*-
+
 # Load modules
 try:
     import os
     import sys
+    import json
     import yaml
+    import random
     import discord
+
+    from discord.ext import commands
 
 except:
     print("Couldn't load all the libaries. Please install the libaries listed in <root>/requirements.txt.")
     sys.exit(0)
 
 # Some basic defenitions
-client = discord.Client()
 cwd = os.getcwd()
 
 # Set token
@@ -23,7 +28,7 @@ def tokenError():
 try:
     with open (cwd + "\\config\\token.txt") as f:
         token = f.read()
-    print(token)
+    print("Token loaded. Length: " + str(len(token)))
 
     if token == "":
         tokenError()
@@ -33,21 +38,72 @@ except:
 
 # Load config
 with open(cwd + '\\config\\main.yml') as f:
-    data = yaml.load(f, Loader=yaml.FullLoader)
-    print("\n\nConfig:\n" + str(data) + "\n\n")
+    config = yaml.load(f, Loader=yaml.FullLoader)
 
+    def fixuml(x):
+        """Fix wrong coding of äüö (German language only)"""
+        return x.replace("Ã¤","ä").replace("Ã¶","ö").replace("Ã¼", "ü")
+
+    def lang(x):
+        return fixuml(random.choice(config["language"][x]))
+
+    print(config)        
+
+    # Def bot
+    client = commands.Bot(command_prefix = config["main"]["prefix"])
+
+with open(cwd + '\\config\\daily.yml') as f:
+    daily = yaml.load(f, Loader=yaml.FullLoader)
+
+# Bot
 @client.event
 async def on_ready():
-    print('Logged in as {0.user}'.format(client))
+    print(f'\nLogged in as {client.user}\n')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+@client.command(name='ping')
+async def ping(ctx):
+    await ctx.send('Ping!')
 
+
+@client.command(name='say')
+async def say(ctx, *args):
+    var = ''
+    for s in args:
+        var += f'{s} '
+    await ctx.send(var)
+
+
+@client.command(name='user')
+async def user(ctx):
+    user = ctx.message.author
+    mention = ctx.message.author.mention
+    id = ctx.message.author.id
+    await ctx.send(user)
+    await ctx.send(mention)
+    await ctx.send(id)
+
+
+@client.command(name='stop')
+@commands.has_permissions(administrator=True)
+async def stop_bot(ctx):
+    await ctx.send('Bot stoppt...')
+    await client.close()
+
+# Commands
+@client.command(name='dailycoins', aliases=["dcoins"])
+async def dailycoins(ctx):
+    if ctx.message.author not in daily["blocked"]["coins"]:
+        await ctx.send(lang("dailycoins") + "\n> +" + str(random.randint(config["currency"]["rarity_normal"]["min"], config["currency"]["rarity_normal"]["max"])) + " " + config["currency"]["symbols"]["currency_normal"])
+        daily["blocked"]["coins"].append(ctx.message.author)
+        with open(cwd + '\\config\\daily.yml', 'w') as f:
+            daily_list = []
+            daily_list.append(daily)
+            yaml.dump(daily_list, f)
+    else:
+        await ctx.send(config["currency"]["symbols"]["error"] + " " + lang("dailyerror"))
+
+# Run
 try:
     client.run(token)
 
