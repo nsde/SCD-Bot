@@ -1,4 +1,12 @@
-# Installation
+# :warning: NEWER VERSION AVAIABLE :warning:
+# https://github.com/nsde/neovision
+
+<br>
+<hr />
+<br>
+<br>
+
+#Installation
 Execute in root dir: `pip install -r requirements.txt` to install the needed libaries.
 After that, create a file in "\config" called "token.txt". The content of the file has to be the bot token (see the section "Security" > "Token")
 
